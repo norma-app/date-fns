@@ -4,6 +4,7 @@ import { formatRelative } from "./_lib/formatRelative/index.js";
 import { localize } from "./_lib/localize/index.js";
 import { match } from "./_lib/match/index.js";
 import type { Locale } from "../types.js";
+import { easternArabicNumerals } from "./numbers.js";
 
 /**
  * @category Locales
@@ -20,6 +21,7 @@ export const ar: Locale = {
   formatRelative: formatRelative,
   localize: localize,
   match: match,
+  numbers: easternArabicNumerals,
   options: {
     weekStartsOn: 6 /* Saturday */,
     firstWeekContainsDate: 1,

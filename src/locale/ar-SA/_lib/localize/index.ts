@@ -1,5 +1,7 @@
 import type { Localize, LocalizeFn } from "../../../types.js";
 import { buildLocalizeFn } from "../../../_lib/buildLocalizeFn/index.js";
+import { replaceNumbers } from "../../../../_lib/replaceNumbers/index.js";
+import { easternArabicNumerals } from "../../../ar/numbers.js";
 
 const eraValues = {
   narrow: ["ق", "ب"] as const,
@@ -130,9 +132,8 @@ const formattingDayPeriodValues = {
   },
 };
 
-const ordinalNumber: LocalizeFn<number> = (dirtyNumber) => {
-  return String(dirtyNumber);
-};
+const ordinalNumber: LocalizeFn<number> = (num) =>
+  replaceNumbers(String(num), easternArabicNumerals);
 
 export const localize: Localize = {
   ordinalNumber,
