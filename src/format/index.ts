@@ -7,6 +7,7 @@ import {
   isProtectedWeekYearToken,
   warnOrThrowProtectedError,
 } from "../_lib/protectedTokens/index.js";
+import { replaceNumbers } from "../_lib/replaceNumbers/index.js";
 import { isValid } from "../isValid/index.js";
 import { toDate } from "../toDate/index.js";
 import type {
@@ -50,7 +51,7 @@ export type { FormatOptions as FormatDateOptions };
  * The {@link format} function options.
  */
 export interface FormatOptions
-  extends LocalizedOptions<"options" | "localize" | "formatLong">,
+  extends LocalizedOptions<"options" | "localize" | "formatLong" | "numbers">,
     WeekOptions,
     FirstWeekContainsDateOptions,
     AdditionalTokensOptions {}
@@ -418,7 +419,7 @@ export function format<DateType extends Date>(
     locale,
   };
 
-  return parts
+  let result = parts
     .map((part) => {
       if (!part.isToken) return part.value;
 
@@ -437,6 +438,12 @@ export function format<DateType extends Date>(
       return formatter(originalDate, token, locale.localize, formatterOptions);
     })
     .join("");
+
+  if (locale.numbers) {
+    result = replaceNumbers(result, locale.numbers);
+  }
+
+  return result;
 }
 
 function cleanEscapedString(input: string): string {
