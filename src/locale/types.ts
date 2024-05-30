@@ -27,6 +27,8 @@ export interface Locale {
   formatLong: FormatLong;
   /** The object with functions used to match and parse various localized values */
   match: Match;
+  /** An optional array of 10 strings, one for each number 0-9  */
+  numbers?: Numbers;
   /** An object with locale options */
   options?: LocaleOptions;
 }
@@ -262,6 +264,19 @@ export interface Match {
   /** The function that parses a localized time of the day. */
   dayPeriod: MatchFn<LocaleDayPeriod>;
 }
+
+export type Numbers = [
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+];
 
 /**
  * The match function. Part of {@link Match}. Implements matcher for particular

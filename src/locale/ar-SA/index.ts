@@ -1,3 +1,4 @@
+import { easternArabicNumerals } from "../ar/numbers.js";
 import type { Locale } from "../types.js";
 import { formatDistance } from "./_lib/formatDistance/index.js";
 import { formatLong } from "./_lib/formatLong/index.js";
@@ -19,6 +20,7 @@ export const arSA: Locale = {
   formatRelative: formatRelative,
   localize: localize,
   match: match,
+  numbers: easternArabicNumerals,
   options: {
     weekStartsOn: 0 /* Sunday */,
     firstWeekContainsDate: 1,
